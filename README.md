@@ -14,9 +14,6 @@ When composing a piece of music, or writing an instrumental solo, typically a co
 Examples
 --------
 The following code generates two octaves of the C-chromatic scale in quarter notes.
-	#include "song.hpp"
-	#include <cstdlib>
-
 	int main() {
 		Song song;
 		song.setSmallestInterval(4);
@@ -30,9 +27,6 @@ The following code generates two octaves of the C-chromatic scale in quarter not
 The output when rendered by [MuseScore](http://musescore.org/) looks like [this](https://github.com/mooshmoosh/SuperSimpleSongSynthesiser/blob/master/CChromatic-1.png)
 
 The following code generates a short C-Blues solo.
-	#include "song.hpp"
-	#include <cstdlib>
-
 	int main() {
 		int note;
 		int duration;
@@ -51,6 +45,14 @@ The following code generates a short C-Blues solo.
 		song.renderSingleNotelistToXML("out.xml");
 	}
 The output when rendered by [MuseScore](http://musescore.org/) looks like [this](https://github.com/mooshmoosh/SuperSimpleSongSynthesiser/blob/master/CBlues-1.png)
+
+About the code
+--------------
+Unit tests can be run with `make check`
+
+If you are familiar with Valgrind, you can check for memory leacks with `make check_memory`
+
+Over time, whenever I have free time I'll be cleaning up bits and pieces of the code, if you have any suggestions or complaints, don't hesitate to write to me. If you want write access just ask.
 
 To Do
 -----
