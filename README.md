@@ -50,13 +50,13 @@ About the code
 --------------
 Unit tests can be run with `make check`
 
-If you are familiar with Valgrind, you can check for memory leacks with `make check_memory`
+If you are familiar with Valgrind, you can check for memory leaks with `make check_memory`
 
 Over time, whenever I have free time I'll be cleaning up bits and pieces of the code, if you have any suggestions or complaints, don't hesitate to write to me. If you want write access just ask.
 
 To Do
 -----
-- When generating notes that are an eighth or shorter, need to be grouped. Create A new function for generating XML code from a NoteWithDuration object. Take an argument which decides if the note is at the beginning, middle or end of a grouping of notes.
+- When generating notes that are an eighth or shorter, they need to be grouped. Create a new function for generating XML code from a NoteWithDuration object. Take an argument which decides if the note is at the beginning, middle or end of a grouping of notes.
 	- the first note it the set has `<beam number="1">begin</beam>` added
 	- the last note in the set has `<beam number="1">continue</beam>` added
 	- All notes in between have `<beam number="1">end</beam>` added
