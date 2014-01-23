@@ -14,17 +14,61 @@ When composing a piece of music, or writing an instrumental solo, typically a co
 Examples
 --------
 The following code generates two octaves of the C-chromatic scale in quarter notes.
-`
-	Song song;
-	song.setSmallestInterval(4);
-	for(int note=-12;note<=12;note++) {
-		song.appendNote(note);
-	}
+	#include "song.hpp"
+	#include <cstdlib>
+
+	int main() {
+		Song song;
+		song.setSmallestInterval(4);
 	
-	song.renderSingleNotelistToXML("out.xml");
-`
+		for(int note=-12;note<=12;note++) {
+			song.appendNote(note);
+		}
+	
+		song.renderSingleNotelistToXML("out.xml");
+	}
+The output when rendered by [MuseScore](http://musescore.org/) looks like [this](https://github.com/mooshmoosh/SuperSimpleSongSynthesiser/blob/master/CChromatic-1.png)
 
 The following code generates a short C-Blues solo.
-`
+	#include "song.hpp"
+	#include <cstdlib>
 
-`
+	int main() {
+		int note;
+		int duration;
+		
+		int bluesScaleNotes[] = {-12,-9,-7,-6,-5,-2,0,3,5,6,7,10,12};
+		
+		Song song;
+		song.setSmallestInterval(4);
+		
+		for(int i=0;i<=16;i++) {
+			note = bluesScaleNotes[rand() % 13];
+			duration = rand() % 3 + 1;
+			song.appendNote(note,duration);
+		}
+		
+		song.renderSingleNotelistToXML("out.xml");
+	}
+The output when rendered by [MuseScore](http://musescore.org/) looks like [this](https://github.com/mooshmoosh/SuperSimpleSongSynthesiser/blob/master/CBlues-1.png)
+
+To Do
+-----
+- When generating notes that are an eighth or shorter, need to be grouped. Create A new function for generating XML code from a NoteWithDuration object. Take an argument which decides if the note is at the beginning, middle or end of a grouping of notes.
+	- the first note it the set has `<beam number="1">begin</beam>` added
+	- the last note in the set has `<beam number="1">continue</beam>` added
+	- All notes in between have `<beam number="1">end</beam>` added
+	
+- Write a function that takes a number of beats left in a bar, and creates a sequence of NoteAndDuration objects that fill that much time.
+
+- A new version of noteToXML function that can print out notes that are tied together.
+	- the first tied note has `<notations><tied type="start"/></notations>`
+	- the last has `<notations><tied type="stop"/></notations>`
+	- all in between have `<notations><tied type="stop"/><tied type="start"/></notations>`
+
+- Make the main generator take bar lines into account
+	- in the main loop keep track of how many beats are left in the bar after adding each note
+	- if the next note will go over the amount of time left, use the above function to create a list of notes to add to fill the rest of the bar
+	- Add these to the file, all tied together
+	- write the bar line
+	- write the remainder of the note tied to the previous ones.
