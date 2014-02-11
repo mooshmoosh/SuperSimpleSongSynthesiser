@@ -14,37 +14,43 @@ When composing a piece of music, or writing an instrumental solo, typically a co
 Examples
 --------
 The following code generates two octaves of the C-chromatic scale in quarter notes.
-		int main() {
-			Song song;
-			song.setSmallestInterval(4);
-	
-			for(int note=-12;note<=12;note++) {
-				song.appendNote(note);
-			}
-	
-			song.renderSingleNotelistToXML("out.xml");
-		}
+
+```
+int main() {
+	Song song;
+	song.setSmallestInterval(4);
+
+	for(int note=-12;note<=12;note++) {
+		song.appendNote(note);
+	}
+
+	song.renderSingleNotelistToXML("out.xml");
+}
+```
+
 The output when rendered by [MuseScore](http://musescore.org/) looks like [this](https://github.com/mooshmoosh/SuperSimpleSongSynthesiser/blob/master/CChromatic-1.png)
 
 The following code generates a short C-Blues solo.
 
-		int main() {
-			int note;
-			int duration;
-		
-			int bluesScaleNotes[] = {-12,-9,-7,-6,-5,-2,0,3,5,6,7,10,12};
-		
-			Song song;
-			song.setSmallestInterval(4);
-		
-			for(int i=0;i<=16;i++) {
-				note = bluesScaleNotes[rand() % 13];
-				duration = rand() % 3 + 1;
-				song.appendNote(note,duration);
-			}
-		
-			song.renderSingleNotelistToXML("out.xml");
-		}
+```
+int main() {
+	int note;
+	int duration;
+
+	int bluesScaleNotes[] = {-12,-9,-7,-6,-5,-2,0,3,5,6,7,10,12};
+
+	Song song;
+	song.setSmallestInterval(4);
+
+	for(int i=0;i<=16;i++) {
+		note = bluesScaleNotes[rand() % 13];
+		duration = rand() % 3 + 1;
+		song.appendNote(note,duration);
+	}
+
+	song.renderSingleNotelistToXML("out.xml");
+}
+```
 
 The output when rendered by [MuseScore](http://musescore.org/) looks like [this](https://github.com/mooshmoosh/SuperSimpleSongSynthesiser/blob/master/CBlues-1.png)
 
